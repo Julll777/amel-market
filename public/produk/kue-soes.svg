@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" role="img" aria-label="Foto: Kue Soes">
+  <rect width="600" height="600" fill="#fff9eb"/>
+  <circle cx="300" cy="250" r="150" fill="#d97706" opacity="0.18"/>
+  <!-- Bentuk Kue Soes Bertekstur -->
+  <path d="M220 280 C200 230, 240 180, 300 170 C360 180, 400 230, 380 280 C400 320, 360 340, 300 340 C240 340, 200 320, 220 280 Z" fill="#d97706" opacity="0.85"/>
+  <ellipse cx="300" cy="260" rx="60" ry="30" fill="#fef3c7" opacity="0.9"/>
+  <text x="300" y="490" text-anchor="middle" font-family="Plus Jakarta Sans, Arial, sans-serif" font-size="52" font-weight="700" fill="#b45309">Kue Soes</text>
+  <text x="300" y="545" text-anchor="middle" font-family="Plus Jakarta Sans, Arial, sans-serif" font-size="24" fill="#b45309" opacity="0.75">Vla Vanila Lembut</text>
+</svg>

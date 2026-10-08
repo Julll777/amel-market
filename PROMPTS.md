@@ -68,3 +68,67 @@ Buat file proxy.js di root proyek (Next.js 16). Semua rute /admin kecuali /admin
 ## Debugging dan fitur bonus
 
 Tambahkan bagian baru untuk setiap error yang kamu perbaiki atau fitur bonus yang kamu kerjakan.
+
+## US-07 List produk di halaman admin dari database
+
+**Prompt: US-07 List Produk di /admin mengambil data dari database, US-08 Tambah produk, US-09 Ubah produk, US-10 Hapus produk, US-11 Filter kategori atau pencarian, US-12 Pilih jumlah atau varian, US-13 PWA, US-14 Deskripsi produk dibuat AI.**
+
+**Hasil: Halaman /admin menampilkan daftar produk langsung dari tabel "produk" di Supabase melalui Server Component.**
+
+**Perbaikan: Tidak Ada**
+
+## US-08 Tambah produk
+
+**Prompt: (sama dengan US-07 di atas)**
+
+**Hasil: Form /admin/produk/baru terhubung ke Server Action tambahProduk yang menyimpan produk baru ke database Supabase, memeriksa login terlebih dahulu, lalu redirect ke /admin.**
+
+**Perbaikan: Tidak Ada**
+
+## US-09 Ubah produk
+
+**Prompt: (sama dengan US-07 di atas)**
+
+**Hasil: Halaman /admin/produk/[id]/ubah mengambil data produk dari Supabase berdasarkan ID, mengisi form secara otomatis, dan menyimpan perubahan ke database via Server Action ubahProduk yang terkunci login.**
+
+**Perbaikan: Tidak Ada**
+
+## US-10 Hapus produk
+
+**Prompt: (sama dengan US-07 di atas)**
+
+**Hasil: Tombol Hapus di TabelProduk meminta konfirmasi dialog browser terlebih dahulu, kemudian memanggil Server Action hapusProduk yang terkunci login dan menghapus produk dari database.**
+
+**Perbaikan: Tidak Ada**
+
+## US-11 Filter kategori atau pencarian
+
+**Prompt: (sama dengan US-07 di atas)**
+
+**Hasil: Halaman katalog / menampilkan kotak pencarian nama produk dan tombol filter per kategori. Perubahan filter/pencarian mengupdate URL dan halaman menampilkan hasil yang sesuai dari Supabase.**
+
+**Perbaikan: Tidak Ada**
+
+## US-12 Pilih jumlah atau varian
+
+**Prompt: (sama dengan US-07 di atas)**
+
+**Hasil: Di halaman detail produk, pengunjung dapat memilih jumlah pesanan menggunakan tombol + dan −. Jumlah yang dipilih ikut tertulis otomatis di pesan WhatsApp beserta total harganya.**
+
+**Perbaikan: Tidak Ada**
+
+## US-13 PWA
+
+**Prompt: (sama dengan US-07 di atas)**
+
+**Hasil: File /public/manifest.json dibuat dengan nama, ikon, warna, dan display: standalone. Link manifest dan apple-touch-icon ditambahkan ke app/layout.jsx sehingga web bisa di-install di HP.**
+
+**Perbaikan: Tidak Ada**
+
+## US-14 Deskripsi produk dibuat AI
+
+**Prompt: (sama dengan US-07 di atas)**
+
+**Hasil: Tombol "✨ Buat dengan AI" di FormProduk memanggil Server Action buatDeskripsiAI yang memanggil Gemini API (jika GEMINI_API_KEY dikonfigurasi di .env.local) dan mengisi kolom deskripsi secara otomatis berdasarkan nama dan kategori produk.**
+
+**Perbaikan: Tidak Ada**

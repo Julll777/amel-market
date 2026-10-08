@@ -1,5 +1,31 @@
+"use client";
+
 import { formatRupiah } from "@/lib/format";
 import Tombol from "@/components/Tombol";
+import { hapusProduk } from "@/app/admin/actions";
+import { useTransition } from "react";
+
+function TombolHapus({ id }) {
+  const [isPending, startTransition] = useTransition();
+
+  function handleHapus() {
+    if (!confirm("Yakin ingin menghapus produk ini? Tindakan ini tidak bisa dibatalkan.")) return;
+    startTransition(async () => {
+      await hapusProduk(id);
+    });
+  }
+
+  return (
+    <button
+      type="button"
+      onClick={handleHapus}
+      disabled={isPending}
+      className="inline-flex items-center justify-center rounded-lg border border-garis bg-latar px-4 py-2.5 text-sm font-semibold text-bahaya transition-colors hover:border-bahaya disabled:opacity-50"
+    >
+      {isPending ? "Menghapus..." : "Hapus"}
+    </button>
+  );
+}
 
 export default function TabelProduk({ daftarProduk }) {
   return (
@@ -28,13 +54,10 @@ export default function TabelProduk({ daftarProduk }) {
               <td className="px-4 py-3">{formatRupiah(produk.harga)}</td>
               <td className="px-4 py-3">
                 <div className="flex justify-end gap-2">
-                  {/* US-09 dan US-10 (bonus): ubah dan hapus produk */}
                   <Tombol href={`/admin/produk/${produk.id}/ubah`} varian="garis">
                     Ubah
                   </Tombol>
-                  <Tombol type="button" varian="bahaya">
-                    Hapus
-                  </Tombol>
+                  <TombolHapus id={produk.id} />
                 </div>
               </td>
             </tr>
