@@ -1,36 +1,48 @@
-import KartuProduk from "@/components/KartuProduk";
-import CatatanBelumAktif from "@/components/CatatanBelumAktif";
-import { produkContoh } from "@/lib/data-contoh";
-import { toko } from "@/lib/toko";
+import { createServerClient } from '@/lib/supabase/server';
+import KartuProduk from '@/components/KartuProduk'; // Sesuaikan path komponen KartuProduk yang ada di proyek
 
-// US-01: halaman ini masih memakai data contoh.
-// Tugas peserta: ambil daftar produk dari tabel "produk" di Supabase, di sisi server.
-export default function HalamanKatalog() {
-  const daftarProduk = produkContoh;
+export const revalidate = 0; // Memastikan data selalu segar dari server
+
+export default async function HomePage() {
+  let produk = [];
+  let errorMessage = null;
+
+  try {
+    const supabase = createServerClient();
+    const { data, error } = await supabase
+      .from('produk')
+      .select('*')
+      .order('id', { ascending: true });
+
+    if (error) {
+      errorMessage = error.message || 'Gagal mengambil data dari Supabase.';
+    } else {
+      produk = data || [];
+    }
+  } catch (err) {
+    errorMessage = err.message || 'Terjadi kesalahan pada server saat menghubungkan ke Supabase.';
+  }
 
   return (
-    <>
-      <section className="py-10 sm:py-14">
-        <h1 className="max-w-2xl text-4xl font-extrabold leading-tight tracking-tight sm:text-5xl">
-          {toko.nama}
-        </h1>
-        <p className="mt-3 max-w-xl text-lg text-teks-lembut">{toko.tagline}</p>
-        <p className="mt-4 text-sm text-teks-lembut">{toko.jamBuka}</p>
-      </section>
+    <main className="container mx-auto px-4 py-8">
+      <h1 className="text-2xl font-bold mb-6">Daftar Produk</h1>
 
-      <section aria-labelledby="judul-produk" className="flex flex-col gap-5">
-        <h2 id="judul-produk" className="text-xl font-bold">
-          Produk kami
-        </h2>
-        <CatatanBelumAktif>
-          Masih data contoh. Sambungkan ke database: lihat US-01 di docs/user-stories.md.
-        </CatatanBelumAktif>
-        <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
-          {daftarProduk.map((produk) => (
-            <KartuProduk key={produk.id} produk={produk} />
+      {errorMessage ? (
+        <div className="p-4 bg-red-50 border border-red-200 text-red-700 rounded-md">
+          <p className="font-semibold">Terjadi kesalahan saat memuat produk:</p>
+          <p className="text-sm mt-1">{errorMessage}</p>
+        </div>
+      ) : produk.length === 0 ? (
+        <div className="py-12 text-center text-gray-500">
+          <p className="text-lg">Belum ada produk</p>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          {produk.map((item) => (
+            <KartuProduk key={item.id} produk={item} />
           ))}
         </div>
-      </section>
-    </>
+      )}
+    </main>
   );
 }
