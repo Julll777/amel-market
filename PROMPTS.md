@@ -26,9 +26,13 @@ Ubah app/produk/[id]/page.jsx supaya mengambil satu produk dari tabel "produk" d
 
 ## US-03 Pesan via WhatsApp
 
-**Prompt:**
+**Prompt:Baca docs/rancangan-teknis.md bagian "Pesan WhatsApp (US-03)".
 
-**Hasil:**
+Ubah components/TombolWhatsApp.jsx menjadi tautan yang membuka https://wa.me/ ke nomor di lib/toko.js, dengan pesan otomatis berisi nama dan harga produk dalam format rupiah. Pesan di-encode dengan encodeURIComponent dan dibuka di tab baru. Pertahankan tampilan tombolnya. Hapus CatatanBelumAktif yang menyebut US-03 di halaman detail produk.**
+
+**Hasil:ab baru browser akan terbuka mengarah ke WhatsApp Web / aplikasi WhatsApp dengan nomor toko dan pesan teks yang sudah terisi otomatis, misalnya:
+
+"Halo, saya ingin memesan Kopi Bubuk Robusta 250 g (Rp 45.000)."**
 
 **Perbaikan:**
 
